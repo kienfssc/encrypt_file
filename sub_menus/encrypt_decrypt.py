@@ -96,11 +96,38 @@ class EncryptDecrypt:
 
         return True
     
+    def encrypt_text(self, text, chunk_size, public_key):
+        # split text by chunk size
+        text_chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+
+        public_key_bytes = RSA.import_key(public_key)
+        encrypted_text = []
+        for chunk in text_chunks:
+            encrypted_chunk = self.encrypt(public_key_bytes, chunk.encode())
+            encrypted_text.append(base64.b64encode(encrypted_chunk).decode())
+
+        return ".".join(encrypted_text)
+
+    
+    def decrypt_text(self, text, chunk_size, private_key):
+        # split text by chunk size
+        text_chunks = text.split(".")
+
+        private_key_bytes = RSA.import_key(private_key)
+        decrypted_text = ""
+        for chunk in text_chunks:
+            encrypted_chunk = base64.b64decode(chunk)
+            decrypted_chunk = self.decrypt(private_key_bytes, encrypted_chunk)
+            decrypted_text += decrypted_chunk.decode()
+
+        return decrypted_text
     
     def print_encrypt_decrypt_menus(self):
         print("1. Encrypt")
         print("2. Decrypt")
-        print("3. Back to main menu")
+        print("3. Encrypt text (one line only)")
+        print("4. Decrypt text (one line only)")
+        print("5. Back to main menu")
         
     def menu_run(self):
         self.print_encrypt_decrypt_menus()
@@ -118,6 +145,16 @@ class EncryptDecrypt:
                     self.decrypt_file(file_path, chunk_size, self.private_key)
                     print("File decrypted successfully.")
                 elif choice == 3:
+                    text = input("Enter the text to encrypt: ")
+                    chunk_size = int(input("Enter the chunk size: "))
+                    encrypted_text = self.encrypt_text(text, chunk_size, self.public_key)
+                    print(f"Encrypted text: {encrypted_text}")
+                elif choice == 4:
+                    text = input("Enter the text to decrypt: ")
+                    chunk_size = int(input("Enter the chunk size: "))
+                    decrypted_text = self.decrypt_text(text, chunk_size, self.private_key)
+                    print(f"Decrypted text: {decrypted_text}")
+                elif choice == 5:
                     break
                 else:
                     print("Invalid choice. Please try again.")
