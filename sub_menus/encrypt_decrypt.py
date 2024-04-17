@@ -49,6 +49,10 @@ class EncryptDecrypt:
         return decrypted_data
 
     def encrypt_file(self, file_path, chunk_size, public_key):
+        if (self.is_initialized == False):
+            print("Key pair is not initialized. Please generate or import a key pair first.")
+            return
+        
         public_key_bytes = RSA.import_key(public_key)
 
         #empty encrypted file
@@ -74,6 +78,10 @@ class EncryptDecrypt:
             
 
     def decrypt_file(self, file_path, chunk_size, private_key_bytes):
+        if (self.is_initialized == False):
+            print("Key pair is not initialized. Please generate or import a key pair first.")
+            return
+        
         # Import the private key
         print(private_key_bytes)
         private_key = RSA.import_key(private_key_bytes)
@@ -97,6 +105,10 @@ class EncryptDecrypt:
         return True
     
     def encrypt_text(self, text, chunk_size, public_key):
+        if (self.is_initialized == False):
+            print("Key pair is not initialized. Please generate or import a key pair first.")
+            return
+        
         # split text by chunk size
         text_chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
 
@@ -110,6 +122,9 @@ class EncryptDecrypt:
 
     
     def decrypt_text(self, text, chunk_size, private_key):
+        if (self.is_initialized == False):
+            print("Key pair is not initialized. Please generate or import a key pair first.")
+            return
         # split text by chunk size
         text_chunks = text.split(".")
 
