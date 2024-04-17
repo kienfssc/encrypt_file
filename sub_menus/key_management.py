@@ -113,6 +113,12 @@ class KeyManagement:
                     print("Your current public key: ")
                     print(self.public_key.decode())
                 elif choice == 8:
+                    if (self.is_initialized == True):
+                        print("Key pair is already initialized. Are you at risk of losing the current key pair?")
+                        x = input("Do you want to continue? (y/n): ")
+                        if x.lower() != 'y':
+                            return
+                        
                     print("Enter the public key to import: ")
 
                     lines = []
