@@ -77,8 +77,8 @@ class KeyManagement:
     def print_menu(self):
         print("Key Management Menu")
         print("1. Generate Key Pair")
-        print("2. Save Key Pair")
-        print("3. Load Key Pair")
+        print("2. Load Key Pair")
+        print("3. Save Key Pair")
         print("4. List Keys")
         print("5. Print Key Info")
         print("7. Share public")
