@@ -105,7 +105,6 @@ class KeyManagement:
                     print("Key pairs in management folder:")
                     for key_name in key_names:
                         print(key_name)
-
                 elif choice == 7:
                     if self.is_initialized == False:
                         print("Key pair is not initialized. Please generate a key pair first.")
@@ -134,7 +133,7 @@ class KeyManagement:
                     public_key_bytes = RSA.import_key(public_key)
 
                     self.private_key = None
-                    self.public_key = public_key_bytes
+                    self.public_key = public_key_bytes.publickey().export_key()
                     self.is_initialized = True
                     self.key_version = time.time()
                 
