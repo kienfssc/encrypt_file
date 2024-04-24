@@ -3,8 +3,17 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Temp files
+temp/*
+
+# data files
+data/*
+
 # Test files
 test*
+
+# Keys
+*.pem
 
 # Release zip file
 *.zip

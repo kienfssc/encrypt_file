@@ -4,6 +4,7 @@ from sub_menus.encrypt_decrypt import EncryptDecrypt
 from print_menu import print_welcome_message, print_menus, print_sign_verify_menus, print_about
 
 KEY_MANAGEMENT_FOLDER = "./keys/"
+TEMP_FOLDER = "./temp/"
 new_key = key_management.KeyManagement()
 
 def main():
