@@ -83,7 +83,6 @@ class EncryptDecrypt:
             return
         
         # Import the private key
-        print(private_key_bytes)
         private_key = RSA.import_key(private_key_bytes)
 
         # read the file by chunk size
